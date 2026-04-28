@@ -113,6 +113,7 @@ def main() -> None:
     body_text = f"Prompt:\n{USER_PROMPT}\n\nResponse:\n{answer}"
     body_html = build_html(USER_PROMPT, answer, OPENAI_MODEL, date_str)
 
+    print(f"DEBUG: {body_text}")
     print(f"Sending email to {EMAIL_RECIPIENT}...")
     send_email(subject, body_text, body_html)
     print("Done ✓")
