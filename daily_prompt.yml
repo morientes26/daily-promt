@@ -1,0 +1,38 @@
+name: Daily ChatGPT Prompt
+
+on:
+  schedule:
+    # Každý deň o 07:00 UTC (= 08:00 alebo 09:00 SEČ/SELČ)
+    - cron: "0 7 * * *"
+
+  # Umožní spustenie ručne z GitHub UI (Actions → Run workflow)
+  workflow_dispatch:
+
+jobs:
+  run-prompt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Run daily prompt
+        env:
+          OPENAI_API_KEY:  ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_SENDER:    ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD:  ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+          # Voliteľné — ak ich nedefinuješ, použijú sa defaulty zo skriptu
+          OPENAI_MODEL:    ${{ vars.OPENAI_MODEL }}
+          SYSTEM_PROMPT:   ${{ vars.SYSTEM_PROMPT }}
+          USER_PROMPT:     ${{ vars.USER_PROMPT }}
+        run: python scripts/run_prompt.py
