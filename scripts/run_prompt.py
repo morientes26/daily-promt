@@ -7,7 +7,7 @@ Reads PROMPT from env, calls OpenAI, sends result via email.
 import os
 import smtplib
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
