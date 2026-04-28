@@ -17,9 +17,9 @@ from openai import OpenAI
 OPENAI_API_KEY   = os.environ["OPENAI_API_KEY"]
 OPENAI_MODEL     = os.getenv("OPENAI_MODEL", "gpt-4o")
 
-EMAIL_SENDER     = os.environ["EMAIL_SENDER", "michalkalman@gmail.com"]       # Gmail adresa odosielateľa
+EMAIL_SENDER     = os.environ["EMAIL_SENDER"]       # Gmail adresa odosielateľa
 EMAIL_PASSWORD   = os.environ["EMAIL_PASSWORD"]     # Gmail App Password (nie bežné heslo)
-EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT", "michalkalman@gmail.com"]    # kam poslať výsledok
+EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
 
 # ── Prompt ───────────────────────────────────────────────────────────────────
 # Zmeň SYSTEM_PROMPT a USER_PROMPT podľa potreby,
