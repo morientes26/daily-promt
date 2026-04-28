@@ -17,9 +17,9 @@ from openai import OpenAI
 OPENAI_API_KEY   = os.environ["OPENAI_API_KEY"]
 OPENAI_MODEL     = os.getenv("OPENAI_MODEL", "gpt-4o")
 
-EMAIL_SENDER     = os.environ["EMAIL_SENDER"]       # Gmail adresa odosielateľa
+EMAIL_SENDER     = os.environ["EMAIL_SENDER", "michalkalman@gmail.com"]       # Gmail adresa odosielateľa
 EMAIL_PASSWORD   = os.environ["EMAIL_PASSWORD"]     # Gmail App Password (nie bežné heslo)
-EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
+EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT", "michalkalman@gmail.com"]    # kam poslať výsledok
 
 # ── Prompt ───────────────────────────────────────────────────────────────────
 # Zmeň SYSTEM_PROMPT a USER_PROMPT podľa potreby,
@@ -53,11 +53,12 @@ def send_email(subject: str, body_text: str, body_html: str) -> None:
     msg["Subject"] = subject
     msg["From"]    = EMAIL_SENDER
     msg["To"]      = EMAIL_RECIPIENT
-
+ 
     msg.attach(MIMEText(body_text, "plain"))
     msg.attach(MIMEText(body_html, "html"))
-
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+ 
+    with smtplib.SMTP("smtp-relay.brevo.com", 587) as server:
+        server.starttls()
         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
         server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
 
