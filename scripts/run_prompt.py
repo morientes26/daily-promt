@@ -15,7 +15,7 @@ from openai import OpenAI
 
 # ── Config from environment variables (GitHub Secrets) ──────────────────────
 OPENAI_API_KEY   = os.environ["OPENAI_API_KEY"]
-OPENAI_MODEL     = os.getenv("OPENAI_MODEL", "gpt-4o")
+OPENAI_MODEL     = os.getenv("OPENAI_MODEL")
 
 EMAIL_SENDER     = os.environ["EMAIL_SENDER"]       # Gmail adresa odosielateľa
 EMAIL_PASSWORD   = os.environ["EMAIL_PASSWORD"]     # Gmail App Password (nie bežné heslo)
@@ -103,7 +103,7 @@ def build_html(prompt: str, answer: str, model: str, date: str) -> str:
 
 
 def main() -> None:
-    date_str = datetime.utcnow().strftime("%A, %d %B %Y")
+    date_str = datetime.now(timezone.utc).strftime("%A, %d %B %Y")
 
     print(f"[{date_str}] Calling {OPENAI_MODEL}...")
     answer = call_openai(SYSTEM_PROMPT, USER_PROMPT)
