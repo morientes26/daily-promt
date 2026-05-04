@@ -22,7 +22,7 @@ EMAIL_SENDER     = os.environ["EMAIL_SENDER"]       # Gmail adresa odosielateľa
 EMAIL_PASSWORD   = os.environ["EMAIL_PASSWORD"]     # Gmail App Password (nie bežné heslo)
 EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
 
-MAILGUN_API_KEY = "YOUR_API_KEY"
+MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
 MAILGUN_DOMAIN = "epedo.sk"
 # ── Prompt ───────────────────────────────────────────────────────────────────
 # Zmeň SYSTEM_PROMPT a USER_PROMPT podľa potreby,
