@@ -8,6 +8,7 @@ import os
 import smtplib
 import sys
 import requests
+import json
 from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
