@@ -28,12 +28,11 @@ jobs:
       - name: Run daily prompt
         env:
           OPENAI_API_KEY:  ${{ secrets.OPENAI_API_KEY }}
-          EMAIL_SENDER:    ${{ secrets.EMAIL_SENDER }}
+          EMAIL_SENDER:    ${{ vars.EMAIL_SENDER }}
           EMAIL_PASSWORD:  ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-          MAILGUN_DOMAIN:  ${{ secrets.MAILGUN_DOMAIN }}
           # Voliteľné — ak ich nedefinuješ, použijú sa defaulty zo skriptu
+          EMAIL_RECIPIENT: ${{ vars.EMAIL_RECIPIENT }}
           OPENAI_MODEL:    ${{ vars.OPENAI_MODEL }}
           SYSTEM_PROMPT:   ${{ vars.SYSTEM_PROMPT }}
           USER_PROMPT:     ${{ vars.USER_PROMPT }}
