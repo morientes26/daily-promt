@@ -29,12 +29,13 @@ MAILGUN_DOMAIN = "epedo.sk"
 # alebo ich presuň do GitHub Variables (nie Secrets) ak ich chceš ľahko meniť.
 
 SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", (
-    "You are a helpful assistant that provides concise, actionable insights."
+    "Si užitočný asistent, ktorý poskytuje stručné, jasné a prakticky využiteľné odpovede."
 ))
 
 USER_PROMPT = os.getenv("USER_PROMPT", (
-    "Give me one important insight or trend in software engineering "
-    "that I should be aware of today. Keep it under 200 words."
+    "Uveď jeden dôležitý trend alebo poznatok zo sveta softvérového inžinierstva, "
+    "ktorý je dnes relevantný. Odpoveď nech je stručná, konkrétna a maximálne do 150 slov. "
+    "Ak je to možné, pridaj aj krátke praktické odporúčanie."
 ))
 
 
