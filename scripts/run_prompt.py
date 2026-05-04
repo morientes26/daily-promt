@@ -7,6 +7,7 @@ Reads PROMPT from env, calls OpenAI, sends result via email.
 import os
 import smtplib
 import sys
+import requests
 from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -21,6 +22,8 @@ EMAIL_SENDER     = os.environ["EMAIL_SENDER"]       # Gmail adresa odosielateľa
 EMAIL_PASSWORD   = os.environ["EMAIL_PASSWORD"]     # Gmail App Password (nie bežné heslo)
 EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
 
+MAILGUN_API_KEY = "YOUR_API_KEY"
+MAILGUN_DOMAIN = "epedo.sk"
 # ── Prompt ───────────────────────────────────────────────────────────────────
 # Zmeň SYSTEM_PROMPT a USER_PROMPT podľa potreby,
 # alebo ich presuň do GitHub Variables (nie Secrets) ak ich chceš ľahko meniť.
@@ -48,20 +51,34 @@ def call_openai(system: str, user: str) -> str:
     return response.choices[0].message.content.strip()
 
 
+# def send_email(subject: str, body_text: str, body_html: str) -> None:
+#     msg = MIMEMultipart("alternative")
+#     msg["Subject"] = subject
+#     msg["From"]    = EMAIL_SENDER
+#     msg["To"]      = EMAIL_RECIPIENT
+ 
+#     msg.attach(MIMEText(body_text, "plain"))
+#     msg.attach(MIMEText(body_html, "html"))
+ 
+#     with smtplib.SMTP("smtp-relay.brevo.com", 587) as server:
+#         server.starttls()
+#         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+#         server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
 def send_email(subject: str, body_text: str, body_html: str) -> None:
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"]    = EMAIL_SENDER
-    msg["To"]      = EMAIL_RECIPIENT
- 
-    msg.attach(MIMEText(body_text, "plain"))
-    msg.attach(MIMEText(body_html, "html"))
- 
-    with smtplib.SMTP("smtp-relay.brevo.com", 587) as server:
-        server.starttls()
-        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
+    response = requests.post(
+        f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+        auth=("api", MAILGUN_API_KEY),
+        data={
+            "from": EMAIL_SENDER,
+            "to": EMAIL_RECIPIENT,
+            "subject": subject,
+            "text": body_text,
+            "html": body_html,
+        },
+    )
 
+    if response.status_code != 200:
+        raise Exception(f"Mailgun error: {response.status_code} - {response.text}")
 
 def build_html(prompt: str, answer: str, model: str, date: str) -> str:
     return f"""
