@@ -25,7 +25,7 @@ EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
 MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
 MAILGUN_DOMAIN = "epedo.sk"
 # ── Prompt ───────────────────────────────────────────────────────────────────
-with open("prompts.json") as f:
+with open("scripts/prompts.json") as f:
     prompts = json.load(f)
 
 day = datetime.today().strftime("%A").lower()
