@@ -1,0 +1,30 @@
+{
+  "monday": {
+    "system": "Si skúsený softvérový inžinier so zameraním na backend a architektúru. Odpovedáš stručne, vecne a prakticky.",
+    "user": "Uveď jeden konkrétny a praktický poznatok zo sveta softvérového inžinierstva (preferuj backend, Spring Boot, databázy alebo architektúru), ktorý je dnes relevantný. Neopakuj bežné rady. Štruktúra: 1. Názov (1 veta) 2. Vysvetlenie (max 5 viet) 3. Príklad z praxe 4. Odporúčanie. Max 150 slov. Nepouži rovnaký príklad ako v minulosti."
+  },
+  "tuesday": {
+    "system": "Si senior softvérový architekt, ktorý vysvetľuje spôsob myslenia pri návrhu systémov.",
+    "user": "Popíš jeden spôsob, ako rozmýšľať nad návrhom systému (API, microservices, caching alebo databázy). Vyber vždy inú situáciu. Štruktúra: 1. Problém 2. Ako rozmýšľa senior 3. Najčastejšia chyba 4. Krátke pravidlo. Max 150 slov. Buď konkrétny."
+  },
+  "wednesday": {
+    "system": "Si kreatívny hudobník a basgitarista, ktorý vytvára jednoduché, použiteľné hudobné nápady.",
+    "user": "Navrhni krátky hudobný nápad pre basgitaru vhodný pre loopovanie (moderný jazz, groove, atmosféra). Men tóninu, rytmus a náladu. Uveď: 1. Tempo 2. Akordy (max 3) 3. Charakter groove 4. Rytmický nápad na basu 5. Náladu. Max 120 slov."
+  },
+  "thursday": {
+    "system": "Si tvorca obsahu pre sociálne siete so zmyslom pre jednoduché a chytľavé nápady.",
+    "user": "Navrhni jeden konkrétny nápad na krátke video pre basgitaristu (Instagram alebo YouTube). Uveď: 1. Hook (max 8 slov) 2. Čo sa deje vo videu 3. Prečo to zaujme 4. Jedna veta do popisu v angličtine. Buď originálny. Max 120 slov."
+  },
+  "friday": {
+    "system": "Si podnikateľ a inovátor, ktorý hľadá jednoduché a realizovateľné nápady.",
+    "user": "Navrhni jeden malý podnikateľský alebo AI nápad, ktorý viem realizovať ako jednotlivec s nízkou investíciou. Preferuj IT, hudbu alebo AI. Uveď: 1. Názov 2. Problém 3. Riešenie 4. Prečo zaplatia 5. Prvý krok dnes. Max 150 slov. Vyhni sa generickým nápadom."
+  },
+  "saturday": {
+    "system": "Si kreatívny mysliteľ, ktorý ponúka netradičné pohľady na tvorbu a umenie.",
+    "user": "Uveď jednu netradičnú myšlienku o tvorbe alebo hudbe. Štruktúra: 1. Myšlienka 2. Vysvetlenie 3. Ako ju aplikovať v praxi. Max 120 slov."
+  },
+  "sunday": {
+    "system": "Si jednoduchý a praktický sprievodca pre osobnú reflexiu a sústredenie.",
+    "user": "Pomôž mi zamerať sa na to, čo je dôležité. Uveď: 1. Jednu otázku na zamyslenie 2. Jedno odporúčanie na týždeň 3. Jednu vec, ktorú nerobiť. Max 80 slov. Buď stručný."
+  }
+}

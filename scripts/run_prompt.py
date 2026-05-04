@@ -25,19 +25,14 @@ EMAIL_RECIPIENT  = os.environ["EMAIL_RECIPIENT"]    # kam poslať výsledok
 MAILGUN_API_KEY = os.environ["MAILGUN_API_KEY"]
 MAILGUN_DOMAIN = "epedo.sk"
 # ── Prompt ───────────────────────────────────────────────────────────────────
-# Zmeň SYSTEM_PROMPT a USER_PROMPT podľa potreby,
-# alebo ich presuň do GitHub Variables (nie Secrets) ak ich chceš ľahko meniť.
+with open("prompts.json") as f:
+    prompts = json.load(f)
 
-SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", (
-    "Si užitočný asistent, ktorý poskytuje stručné, jasné a prakticky využiteľné odpovede."
-))
+day = datetime.today().strftime("%A").lower()
+selected = prompts[day]
 
-USER_PROMPT = os.getenv("USER_PROMPT", (
-    "Uveď jeden dôležitý trend alebo poznatok zo sveta softvérového inžinierstva, "
-    "ktorý je dnes relevantný. Odpoveď nech je stručná, konkrétna a maximálne do 150 slov. "
-    "Ak je to možné, pridaj aj krátke praktické odporúčanie."
-))
-
+SYSTEM_PROMPT = selected["system"]
+USER_PROMPT = selected["user"]
 
 def call_openai(system: str, user: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)

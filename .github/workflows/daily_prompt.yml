@@ -34,7 +34,5 @@ jobs:
           # Voliteľné — ak ich nedefinuješ, použijú sa defaulty zo skriptu
           EMAIL_RECIPIENT: ${{ vars.EMAIL_RECIPIENT }}
           OPENAI_MODEL:    ${{ vars.OPENAI_MODEL }}
-          SYSTEM_PROMPT:   ${{ vars.SYSTEM_PROMPT }}
-          USER_PROMPT:     ${{ vars.USER_PROMPT }}
 
         run: python scripts/run_prompt.py
