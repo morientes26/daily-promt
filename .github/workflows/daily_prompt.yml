@@ -36,3 +36,13 @@ jobs:
           OPENAI_MODEL:    ${{ vars.OPENAI_MODEL }}
 
         run: python scripts/run_prompt.py
+
+      # - name: Create credentials.json
+      #   run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
+      
+      # - name: Export calendar events
+      #   env:
+      #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      #     CALENDAR_ID:       ${{ vars.CALENDAR_ID }}
+
+      #   run: python scripts/export_calendar.py

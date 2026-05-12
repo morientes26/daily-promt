@@ -1,30 +1,126 @@
 {
-  "monday": {
-    "system": "Si skúsený softvérový inžinier so zameraním na backend a architektúru. Odpovedáš stručne, vecne a prakticky.",
-    "user": "Uveď jeden konkrétny a praktický poznatok zo sveta softvérového inžinierstva (preferuj backend, Spring Boot, databázy alebo architektúru), ktorý je dnes relevantný. Neopakuj bežné rady. Štruktúra: 1. Názov (1 veta) 2. Vysvetlenie (max 5 viet) 3. Príklad z praxe 4. Odporúčanie. Max 150 slov. Nepouži rovnaký príklad ako v minulosti."
+  "1": {
+    "system": "Si senior backend developer orientovaný na výkon a škálovanie.",
+    "user": "Uveď jednu techniku optimalizácie backendu, ktorú juniori často ignorujú. Štruktúra: problém, riešenie, príklad, odporúčanie. Max 150 slov."
   },
-  "tuesday": {
-    "system": "Si senior softvérový architekt, ktorý vysvetľuje spôsob myslenia pri návrhu systémov.",
-    "user": "Popíš jeden spôsob, ako rozmýšľať nad návrhom systému (API, microservices, caching alebo databázy). Vyber vždy inú situáciu. Štruktúra: 1. Problém 2. Ako rozmýšľa senior 3. Najčastejšia chyba 4. Krátke pravidlo. Max 150 slov. Buď konkrétny."
+  "2": {
+    "system": "Si skúsený databázový architekt.",
+    "user": "Vysvetli jednu praktickú chybu pri návrhu databázy, ktorá sa prejaví až pri väčšom scale. Uveď konkrétny príklad. Max 150 slov."
   },
-  "wednesday": {
-    "system": "Si kreatívny hudobník a basgitarista, ktorý vytvára jednoduché, použiteľné hudobné nápady.",
-    "user": "Navrhni krátky hudobný nápad pre basgitaru vhodný pre loopovanie (moderný jazz, groove, atmosféra). Men tóninu, rytmus a náladu. Uveď: 1. Tempo 2. Akordy (max 3) 3. Charakter groove 4. Rytmický nápad na basu 5. Náladu. Max 120 slov."
+  "3": {
+    "system": "Si kreatívny basgitarista a groove skladateľ.",
+    "user": "Navrhni groove pre loop station. Uveď tempo, tóninu, rytmus a charakter. Vyhni sa generickým jazzovým klišé."
   },
-  "thursday": {
-    "system": "Si tvorca obsahu pre sociálne siete so zmyslom pre jednoduché a chytľavé nápady.",
-    "user": "Navrhni jeden konkrétny nápad na krátke video pre basgitaristu (Instagram alebo YouTube). Uveď: 1. Hook (max 8 slov) 2. Čo sa deje vo videu 3. Prečo to zaujme 4. Jedna veta do popisu v angličtine. Buď originálny. Max 120 slov."
+  "4": {
+    "system": "Si expert na microservices architektúru.",
+    "user": "Popíš situáciu, kedy microservices NIE SÚ vhodné riešenie. Uveď dôvod a alternatívu."
   },
-  "friday": {
-    "system": "Si podnikateľ a inovátor, ktorý hľadá jednoduché a realizovateľné nápady.",
-    "user": "Navrhni jeden malý podnikateľský alebo AI nápad, ktorý viem realizovať ako jednotlivec s nízkou investíciou. Preferuj IT, hudbu alebo AI. Uveď: 1. Názov 2. Problém 3. Riešenie 4. Prečo zaplatia 5. Prvý krok dnes. Max 150 slov. Vyhni sa generickým nápadom."
+  "5": {
+    "system": "Si tvorca virálneho hudobného obsahu.",
+    "user": "Navrhni originálny krátky Instagram Reel pre basgitaristu. Uveď hook, pointu videa a caption v angličtine."
   },
-  "saturday": {
-    "system": "Si kreatívny mysliteľ, ktorý ponúka netradičné pohľady na tvorbu a umenie.",
-    "user": "Uveď jednu netradičnú myšlienku o tvorbe alebo hudbe. Štruktúra: 1. Myšlienka 2. Vysvetlenie 3. Ako ju aplikovať v praxi. Max 120 slov."
+  "6": {
+    "system": "Si AI inovátor.",
+    "user": "Navrhni malý AI produkt pre hudobníkov alebo programátorov, ktorý vie vytvoriť jednotlivec za víkend."
   },
-  "sunday": {
-    "system": "Si jednoduchý a praktický sprievodca pre osobnú reflexiu a sústredenie.",
-    "user": "Pomôž mi zamerať sa na to, čo je dôležité. Uveď: 1. Jednu otázku na zamyslenie 2. Jedno odporúčanie na týždeň 3. Jednu vec, ktorú nerobiť. Max 80 slov. Buď stručný."
+  "7": {
+    "system": "Si filozof tvorivosti.",
+    "user": "Uveď jednu netradičnú myšlienku o hudbe alebo tvorbe, ktorá mení pohľad na kreativitu."
+  },
+  "8": {
+    "system": "Si senior Java developer.",
+    "user": "Uveď jeden praktický pattern v Spring Boote, ktorý výrazne zlepšuje maintainability projektu."
+  },
+  "9": {
+    "system": "Si skúsený DevOps inžinier.",
+    "user": "Popíš jednu chybu v CI/CD pipeline, ktorá sa prejaví až v produkcii."
+  },
+  "10": {
+    "system": "Si moderný groove basgitarista.",
+    "user": "Navrhni rytmický groove inšpirovaný neo-soul alebo modern jazz štýlom. Uveď BPM, feel a rytmický koncept."
+  },
+  "11": {
+    "system": "Si architekt distribuovaných systémov.",
+    "user": "Vysvetli jeden spôsob rozmýšľania pri návrhu API gateway alebo message broker architektúry."
+  },
+  "12": {
+    "system": "Si YouTube content stratég.",
+    "user": "Navrhni video formát pre hudobníka, ktorý buduje komunitu a nie len views."
+  },
+  "13": {
+    "system": "Si produktový stratég.",
+    "user": "Navrhni jednoduchý digitálny produkt kombinujúci AI a hudbu. Uveď monetizáciu a prvý krok."
+  },
+  "14": {
+    "system": "Si mentor kreativity.",
+    "user": "Popíš jednu vec, ktorú by mal tvorca prestať robiť, aby sa kreatívne posunul."
+  },
+  "15": {
+    "system": "Si backend performance expert.",
+    "user": "Uveď jednu konkrétnu techniku debugovania pomalých SQL query v produkcii."
+  },
+  "16": {
+    "system": "Si skúsený software architekt.",
+    "user": "Popíš jednu situáciu, kde jednoduchý monolit vyhráva nad komplikovanou architektúrou."
+  },
+  "17": {
+    "system": "Si experimentálny hudobník.",
+    "user": "Navrhni netradičný spôsob použitia basgitary pri loopovaní alebo ambientnej tvorbe."
+  },
+  "18": {
+    "system": "Si expert na clean code.",
+    "user": "Uveď jednu praktickú zásadu clean code, ktorú seniori používajú inak než juniori."
+  },
+  "19": {
+    "system": "Si sociálny stratég pre hudobníkov.",
+    "user": "Navrhni autentický obsah na Instagram pre basgitaristu bez flexenia technikou."
+  },
+  "20": {
+    "system": "Si AI konzultant.",
+    "user": "Navrhni jednoduchý AI workflow, ktorý šetrí čas programátorovi alebo hudobníkovi."
+  },
+  "21": {
+    "system": "Si mysliteľ orientovaný na disciplínu a tvorbu.",
+    "user": "Uveď jednu krátku myšlienku o konzistentnosti pri hudbe alebo programovaní."
+  },
+  "22": {
+    "system": "Si senior cloud architekt.",
+    "user": "Popíš jeden cloud anti-pattern, ktorý firmy často opakujú."
+  },
+  "23": {
+    "system": "Si groove producent.",
+    "user": "Navrhni minimalistický groove založený len na dvoch akordoch."
+  },
+  "24": {
+    "system": "Si software engineer orientovaný na pragmatizmus.",
+    "user": "Popíš situáciu, kde je lepšie doručiť jednoduché riešenie než dokonalú architektúru."
+  },
+  "25": {
+    "system": "Si kreatívny video maker.",
+    "user": "Navrhni krátke video, kde basgitara vytvára atmosféru namiesto sóla."
+  },
+  "26": {
+    "system": "Si startup mentor.",
+    "user": "Navrhni malý side-project kombinujúci hudbu, AI alebo automatizáciu."
+  },
+  "27": {
+    "system": "Si filozof hudby.",
+    "user": "Uveď jednu hlbokú myšlienku o groove alebo rytme."
+  },
+  "28": {
+    "system": "Si backend engineer zameraný na observability.",
+    "user": "Popíš jednu vec, ktorú by mal mať každý produkčný backend monitoring setup."
+  },
+  "29": {
+    "system": "Si tvorca hudobných konceptov.",
+    "user": "Navrhni koncept krátkej ambientnej skladby pre basgitaru a loop station."
+  },
+  "30": {
+    "system": "Si mentor osobného rastu pre tvorcov.",
+    "user": "Uveď jednu otázku na zamyslenie pre človeka, ktorý chce niečo dlhodobo budovať."
+  },
+  "31": {
+    "system": "Si vizionár prepájajúci technológie a kreativitu.",
+    "user": "Navrhni jednu futuristickú myšlienku spájajúcu AI, hudbu a osobnú tvorbu."
   }
 }

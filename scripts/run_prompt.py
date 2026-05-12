@@ -8,6 +8,7 @@ import os
 import smtplib
 import sys
 import requests
+import random
 import json
 from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
@@ -29,8 +30,12 @@ MAILGUN_DOMAIN = "epedo.sk"
 with open("scripts/prompts.json") as f:
     prompts = json.load(f)
 
-day = datetime.today().strftime("%A").lower()
-selected = prompts[day]
+current_day = str(datetime.now().day)
+selected = prompts.get(current_day)
+if not selected:
+    prompt = random.choice(list(prompts.values()))
+
+selected = prompts[str(datetime.now().day)]
 
 SYSTEM_PROMPT = selected["system"]
 USER_PROMPT = selected["user"]
@@ -47,20 +52,6 @@ def call_openai(system: str, user: str) -> str:
     )
     return response.choices[0].message.content.strip()
 
-
-# def send_email(subject: str, body_text: str, body_html: str) -> None:
-#     msg = MIMEMultipart("alternative")
-#     msg["Subject"] = subject
-#     msg["From"]    = EMAIL_SENDER
-#     msg["To"]      = EMAIL_RECIPIENT
- 
-#     msg.attach(MIMEText(body_text, "plain"))
-#     msg.attach(MIMEText(body_html, "html"))
- 
-#     with smtplib.SMTP("smtp-relay.brevo.com", 587) as server:
-#         server.starttls()
-#         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-#         server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
 def send_email(subject: str, body_text: str, body_html: str) -> None:
     response = requests.post(
         f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
