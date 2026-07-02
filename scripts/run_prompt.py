@@ -89,7 +89,7 @@ def build_html(prompt: str, answer: str, model: str, date: str) -> str:
 </head>
 <body>
   <div class="header">
-    <h2 style="margin:0">📬 Daily AI Briefing</h2>
+    <h2 style="margin:0">Daily Briefing</h2>
     <div style="color:#888; font-size:13px; margin-top:4px">{date}</div>
   </div>
 
@@ -114,7 +114,7 @@ def main() -> None:
     answer = call_openai(SYSTEM_PROMPT, USER_PROMPT)
     print(f"Got response ({len(answer)} chars)")
 
-    subject   = f"Daily AI Briefing — {date_str}"
+    subject   = f"Briefing — {date_str}"
     body_text = f"Prompt:\n{USER_PROMPT}\n\nResponse:\n{answer}"
     body_html = build_html(USER_PROMPT, answer, OPENAI_MODEL, date_str)
 
