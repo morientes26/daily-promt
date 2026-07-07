@@ -16,6 +16,9 @@ import requests
 from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
 import random
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 from bs4 import BeautifulSoup
 from openai import OpenAI
@@ -159,10 +162,14 @@ def call_openai(system: str, user: str) -> str:
     return response.choices[0].message.content.strip()
 
 
-def send_email(subject: str, body_text: str, body_html: str) -> None:
+def send_email(subject: str, body_text: str, body_html: str, attachment_path: str | None = None) -> None:
     if not MAILGUN_API_KEY or not EMAIL_SENDER or not EMAIL_RECIPIENT:
         print("Email skipped: missing MAILGUN_API_KEY/EMAIL_SENDER/EMAIL_RECIPIENT", file=sys.stderr)
         return
+
+    files = {}
+    if attachment_path and os.path.exists(attachment_path):
+        files[os.path.basename(attachment_path)] = (os.path.basename(attachment_path), open(attachment_path, "rb"), "text/markdown")
 
     response = requests.post(
         f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
@@ -174,6 +181,7 @@ def send_email(subject: str, body_text: str, body_html: str) -> None:
             "text": body_text,
             "html": body_html,
         },
+        files=files,
     )
 
     if response.status_code != 200:
@@ -310,7 +318,7 @@ def main(argv=None):
     subject = f"Freya Article — {title}"
     body_text = f"Title:\n{title}\n\nArticle:\n{article}"
     body_html = build_html(title, article, OPENAI_MODEL or "gpt-4o", date_str)
-    send_email(subject, body_text, body_html)
+    send_email(subject, body_text, body_html, attachment_path=filename)
 
     print(f"Article saved to {filename}")
     print(f"Email sent to {EMAIL_RECIPIENT}")
