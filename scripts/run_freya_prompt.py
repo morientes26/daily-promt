@@ -16,6 +16,7 @@ import requests
 from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
 import random
+import smtplib
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -163,29 +164,30 @@ def call_openai(system: str, user: str) -> str:
 
 
 def send_email(subject: str, body_text: str, body_html: str, attachment_path: str | None = None) -> None:
-    if not MAILGUN_API_KEY or not EMAIL_SENDER or not EMAIL_RECIPIENT:
-        print("Email skipped: missing MAILGUN_API_KEY/EMAIL_SENDER/EMAIL_RECIPIENT", file=sys.stderr)
+    if not EMAIL_SENDER or not EMAIL_RECIPIENT or not EMAIL_PASSWORD:
+        print("Email skipped: missing EMAIL_SENDER/EMAIL_RECIPIENT/EMAIL_PASSWORD", file=sys.stderr)
         return
 
-    files = {}
+    message = MIMEMultipart("mixed")
+    message["Subject"] = subject
+    message["From"] = EMAIL_SENDER
+    message["To"] = EMAIL_RECIPIENT
+
+    text_part = MIMEText(body_text, "plain", "utf-8")
+    html_part = MIMEText(body_html, "html", "utf-8")
+    message.attach(text_part)
+    message.attach(html_part)
+
     if attachment_path and os.path.exists(attachment_path):
-        files[os.path.basename(attachment_path)] = (os.path.basename(attachment_path), open(attachment_path, "rb"), "text/markdown")
+        with open(attachment_path, "rb") as fh:
+            attachment = MIMEApplication(fh.read(), Name=os.path.basename(attachment_path))
+        attachment["Content-Disposition"] = f'attachment; filename="{os.path.basename(attachment_path)}"'
+        message.attach(attachment)
 
-    response = requests.post(
-        f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
-        auth=("api", MAILGUN_API_KEY),
-        data={
-            "from": EMAIL_SENDER,
-            "to": EMAIL_RECIPIENT,
-            "subject": subject,
-            "text": body_text,
-            "html": body_html,
-        },
-        files=files,
-    )
-
-    if response.status_code != 200:
-        raise Exception(f"Mailgun error: {response.status_code} - {response.text}")
+    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+        smtp.starttls()
+        smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        smtp.send_message(message)
 
 
 def build_html(title: str, article: str, model: str, date: str) -> str:
