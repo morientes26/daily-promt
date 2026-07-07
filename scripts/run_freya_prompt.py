@@ -39,7 +39,7 @@ def load_env_file(path: str = ".env") -> None:
 load_env_file()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL")
-BLOG_URL = os.environ.get("BLOG_URL")
+BLOG_URL = os.environ.get("BLOG_URL") or "https://freyavik.github.io/blog/"
 
 EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
