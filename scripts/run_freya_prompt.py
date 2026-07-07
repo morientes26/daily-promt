@@ -184,10 +184,13 @@ def send_email(subject: str, body_text: str, body_html: str, attachment_path: st
         attachment["Content-Disposition"] = f'attachment; filename="{os.path.basename(attachment_path)}"'
         message.attach(attachment)
 
-    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
-        smtp.starttls()
-        smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
-        smtp.send_message(message)
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+            smtp.starttls()
+            smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
+            smtp.send_message(message)
+    except Exception as exc:
+        print(f"Email send failed: {exc}", file=sys.stderr)
 
 
 def build_html(title: str, article: str, model: str, date: str) -> str:
@@ -306,7 +309,7 @@ def main(argv=None):
 
     title = extract_article_title(article, fallback=posts[0]["title"] if posts else None)
     slug = slugify(title)
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     timestamp = now.strftime("%Y%m%dT%H%M%SZ")
     date_str = now.strftime("%Y-%m-%d")
     filename = args.save or f"outputs/{slug}-{timestamp}.md"
