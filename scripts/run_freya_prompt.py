@@ -250,7 +250,7 @@ def main(argv=None):
     parser.add_argument("--save", dest="save", help="Path to save generated article (optional)")
     args = parser.parse_args(argv)
 
-    blog_url = args.blog_url or os.environ.get("BLOG_URL")
+    blog_url = args.blog_url or BLOG_URL
     if not blog_url:
         print("Provide --blog-url or set BLOG_URL environment variable", file=sys.stderr)
         sys.exit(2)
