@@ -131,7 +131,10 @@ def pick_theme(prompts: dict) -> dict:
             continue
 
         if "theme" in value and "context" in value:
-            candidates.append(value)
+            theme_value = value["theme"]
+            if isinstance(theme_value, (list, tuple)) and theme_value:
+                theme_value = random.choice(theme_value)
+            candidates.append({"theme": theme_value, "context": value["context"]})
         elif "user" in value and "system" in value:
             candidates.append(
                 {

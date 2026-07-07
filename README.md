@@ -66,3 +66,12 @@ Prompt zmeníš priamo v GitHub UI bez dotyku kódu:
 
 - **GitHub Actions**: zadarmo (2 000 min/mesiac na private repo, pre tento use-case ~5 min/mesiac)
 - **OpenAI**: `gpt-4o-mini` ≈ $0.001/deň | `gpt-4o` ≈ $0.01–0.05/deň
+
+
+## Uzitocne prikazy pre spravu
+
+```
+sudo cp outputs/*.md /home/freya/blog/content/posts/ && \
+sudo chown freya:freya /home/freya/blog/content/posts/*.md && \
+sudo ls -l /home/freya/blog/content/posts
+```
