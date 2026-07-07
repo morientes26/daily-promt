@@ -167,9 +167,48 @@ def call_openai(system: str, user: str) -> str:
 
 
 def send_email(subject: str, body_text: str, body_html: str, attachment_path: str | None = None) -> None:
-    if not EMAIL_SENDER or not EMAIL_RECIPIENT or not EMAIL_PASSWORD:
-        print("Email skipped: missing EMAIL_SENDER/EMAIL_RECIPIENT/EMAIL_PASSWORD", file=sys.stderr)
+    # Use Mailgun API exclusively for sending email. Do not fallback to SMTP/Gmail.
+    if not MAILGUN_API_KEY or not MAILGUN_DOMAIN:
+        print("Mailgun not configured: set MAILGUN_API_KEY and MAILGUN_DOMAIN", file=sys.stderr)
         return
+
+    if not EMAIL_SENDER or not EMAIL_RECIPIENT:
+        print("Email skipped: missing EMAIL_SENDER or EMAIL_RECIPIENT", file=sys.stderr)
+        return
+
+    data = {
+        "from": EMAIL_SENDER,
+        "to": EMAIL_RECIPIENT,
+        "subject": subject,
+        "text": body_text,
+        "html": body_html,
+    }
+    files = None
+    try:
+        if attachment_path and os.path.exists(attachment_path):
+            files = [("attachment", (os.path.basename(attachment_path), open(attachment_path, "rb")))]
+
+        resp = requests.post(
+            f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+            auth=("api", MAILGUN_API_KEY),
+            data=data,
+            files=files,
+            timeout=30,
+        )
+
+        if resp.status_code not in (200, 201):
+            print(f"Mailgun send failed: {resp.status_code} - {resp.text}", file=sys.stderr)
+        else:
+            print("Email sent via Mailgun")
+    except Exception as exc:
+        print(f"Mailgun request failed: {exc}", file=sys.stderr)
+    finally:
+        if files:
+            for _, filetup in files:
+                try:
+                    filetup[1].close()
+                except Exception:
+                    pass
 
     message = MIMEMultipart("mixed")
     message["Subject"] = subject
