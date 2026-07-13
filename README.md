@@ -74,4 +74,6 @@ Prompt zmeníš priamo v GitHub UI bez dotyku kódu:
 sudo cp outputs/*.md /home/freya/blog/content/posts/ && \
 sudo chown freya:freya /home/freya/blog/content/posts/*.md && \
 sudo ls -l /home/freya/blog/content/posts
+
+sudo cp outputs/*.png /home/freya/blog/static/images/ && sudo chown freya:freya /home/freya/blog/static/images/*.png && sudo ls -l /home/freya/blog/static/images
 ```
