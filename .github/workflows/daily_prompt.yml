@@ -3,7 +3,7 @@ name: Daily ChatGPT Prompt
 on:
   schedule:
     # Každý deň o 07:00 UTC (= 08:00 alebo 09:00 SEČ/SELČ)
-    - cron: "0 7 * * *"
+    - cron: "0 0 1 * *"
 
   # Umožní spustenie ručne z GitHub UI (Actions → Run workflow)
   workflow_dispatch:
